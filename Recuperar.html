@@ -1,0 +1,90 @@
+<link href="estilo.css" rel="stylesheet">
+
+<!------ Include the above in your HEAD tag ---------->
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Login Page</title>
+   <!--Made with love by Mutiullah Samim -->
+   
+	<!--Bootsrap 4 CDN-->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    
+    <!--Fontawesome CDN-->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
+</head>
+<body>
+<div class="container">
+	<div class="d-flex justify-content-center h-100">
+		<div class="card">
+			<div class="card-header">
+				<h3>Recupera tu contraseña</h3>
+				
+			</div>
+			<div class="card-body">
+				<form>
+					<div class="input-group form-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text"><i class="fas fa-user"></i></span>
+						</div>
+						<input type="text" class="form-control" id="username" placeholder="username">
+						
+					</div>
+					
+					<div class="form-group">
+						<input type="button" value="Recuperar" onclick="recuperar()" class="btn float-right login_btn">
+                    </div>
+                    
+                    <div class="form-group">
+						<input type="button" value="Regresar" onclick="registrar()" class="btn float-right login_btn">
+					</div>
+				</form>
+			</div>
+			
+		</div>
+	</div>
+</div>
+
+<script>    
+    function recuperar(){  
+	var username = document.querySelector('#username').value 
+
+	var objeto = {    
+		"userName": username
+		}                  
+	console.log(objeto)
+
+	fetch('http://127.0.0.1:5000/registro')
+    .then(response => response.json())
+	.catch(err =>
+		alert('F por el fetch, revise consola')
+	)
+	.then(response => {
+        var existe = false
+        for(var iterador in response){
+            if(username == response[iterador].userName){
+                alert(`La contraseña recuperada es: ${response[iterador].contrasena}`) 
+                existe = true 
+                break
+            }
+        }if(existe==false){
+            alert(`El usuario: ${username}, no ha sido creado`)
+        }
+
+	})
+	}
+
+	function registrar(){
+		location.href = "logIn.html"
+	}
+</script>
+
+<audio controls autoplay loop>
+	<source  src="musica-Rameses-B-Bae-Bae-1.mp3"  type="audio/mp3">
+</audio>
+
+</body>
+</html>
+
